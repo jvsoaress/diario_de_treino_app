@@ -1,3 +1,4 @@
+import '../entities/workout.dart';
 import '../repositories/workout_repository.dart';
 
 class SaveWorkoutUseCase {
@@ -5,7 +6,7 @@ class SaveWorkoutUseCase {
 
   const SaveWorkoutUseCase(this._repository);
 
-  Future<void> call() {
-    return _repository.create();
+  Future<void> call(Workout workout) {
+    return _repository.create(workout);
   }
 }
