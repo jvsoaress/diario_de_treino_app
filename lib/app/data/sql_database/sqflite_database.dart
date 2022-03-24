@@ -12,7 +12,11 @@ class SqfliteDatabase implements SqlDatabase {
     }
     final devicePath = await sqflite.getDatabasesPath();
     final filePath = devicePath + fileName;
-    _db = await sqflite.openDatabase(filePath);
+    _db = await sqflite.openDatabase(filePath, onConfigure: _enableForeignKeys);
+  }
+
+  Future<void> _enableForeignKeys(sqflite.Database db) {
+    return db.execute('PRAGMA foreign_keys = ON');
   }
 
   @override
