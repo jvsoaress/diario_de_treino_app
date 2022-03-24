@@ -12,7 +12,7 @@ void main() {
 
   test('should throw Exception if database name doesnt end with .db', () async {
     const wrongName = 'testDatabase';
-    final future = database.open(databaseName: wrongName);
+    final future = database.open(fileName: wrongName);
 
     expect(future, throwsA(isA<InvalidDatabaseNameException>()));
   });

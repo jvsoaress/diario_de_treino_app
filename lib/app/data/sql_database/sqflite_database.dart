@@ -6,12 +6,12 @@ class SqfliteDatabase implements SqlDatabase {
   sqflite.Database? _db;
 
   @override
-  Future<void> open({required String databaseName}) async {
-    if (!databaseName.endsWith('.db')) {
+  Future<void> open({required String fileName}) async {
+    if (!fileName.endsWith('.db')) {
       throw InvalidDatabaseNameException();
     }
     final devicePath = await sqflite.getDatabasesPath();
-    final filePath = devicePath + databaseName;
+    final filePath = devicePath + fileName;
     _db = await sqflite.openDatabase(filePath);
   }
 
