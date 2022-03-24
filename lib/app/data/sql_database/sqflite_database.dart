@@ -25,8 +25,9 @@ class SqfliteDatabase implements SqlDatabase {
   }
 
   @override
-  Future<void> insert(String query, [List? args]) {
-    return _db!.rawInsert(query, args);
+  Future<RowId> insert(String query, [List? args]) async {
+    final id = await _db!.rawInsert(query, args);
+    return RowId(id.toString());
   }
 
   @override
