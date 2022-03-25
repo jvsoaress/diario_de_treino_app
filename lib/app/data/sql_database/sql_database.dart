@@ -1,4 +1,6 @@
 abstract class SqlDatabase {
+  bool get isOpen;
+
   Future<void> open({required String fileName});
   Future<void> execute(String query, [List<dynamic>? args]);
   Future<List<Map>> read(String query, [List<dynamic>? args]);

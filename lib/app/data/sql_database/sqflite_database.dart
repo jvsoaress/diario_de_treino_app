@@ -6,6 +6,9 @@ class SqfliteDatabase implements SqlDatabase {
   sqflite.Database? _db;
 
   @override
+  bool get isOpen => _db?.isOpen ?? false;
+
+  @override
   Future<void> open({required String fileName}) async {
     if (!fileName.endsWith('.db')) {
       throw InvalidDatabaseNameException();
