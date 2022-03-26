@@ -49,6 +49,3 @@ final mockedWorkout = Workout(
 );
 
 class TitleLengthExceededFailure {}
-
-// add observations
-// save workout
