@@ -10,4 +10,6 @@ class Exercise with _$Exercise {
     required String name,
     required List<PerformedSet> sets,
   }) = _Exercise;
+
+  factory Exercise.empty() => Exercise(name: '', sets: []);
 }
