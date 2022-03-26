@@ -1,3 +1,5 @@
+import 'package:diario_de_treino_app/app/data/repositories/workout_repository_impl.dart';
+import 'package:diario_de_treino_app/app/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -7,11 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Diário de Treino',
-      home: Scaffold(
-        body: Center(
-          child: Text('home'),
-        ),
-      ),
+      home: HomeScreen(),
     );
   }
 }
