@@ -50,18 +50,18 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 stream: _workoutBloc.pageStateOut,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    final cleito = snapshot.data!;
+                    final pageState = snapshot.data!;
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
-                        cleito.pagesCount,
+                        pageState.pagesCount,
                         (index) => Container(
                           width: 10,
                           height: 10,
                           margin: const EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: cleito.currentPageIndex == index
+                            color: pageState.currentPageIndex == index
                                 ? Colors.blue
                                 : Colors.grey.shade300,
                           ),
