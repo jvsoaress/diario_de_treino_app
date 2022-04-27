@@ -1,4 +1,4 @@
-import 'package:diario_de_treino_app/app/presentation/base_bloc.dart';
+import 'package:diario_de_treino_app/app/presentation/blocs/base_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rxdart/rxdart.dart';

@@ -1,10 +1,10 @@
 import 'package:diario_de_treino_app/app/domain/entities/exercise.dart';
 import 'package:diario_de_treino_app/app/domain/entities/workout.dart';
-import 'package:diario_de_treino_app/app/presentation/base_bloc.dart';
-import 'package:diario_de_treino_app/app/presentation/page_bloc.dart';
+import 'package:diario_de_treino_app/app/presentation/blocs/base_bloc.dart';
+import 'package:diario_de_treino_app/app/presentation/blocs/page_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../domain/entities/performed_set.dart';
+import '../../domain/entities/performed_set.dart';
 
 class WorkoutBloc extends BaseBloc {
   final PageBloc _pageBloc;

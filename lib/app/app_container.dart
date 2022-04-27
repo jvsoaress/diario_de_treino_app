@@ -1,5 +1,5 @@
-import 'package:diario_de_treino_app/app/presentation/page_bloc.dart';
-import 'package:diario_de_treino_app/app/presentation/workout_bloc.dart';
+import 'package:diario_de_treino_app/app/presentation/blocs/page_bloc.dart';
+import 'package:diario_de_treino_app/app/presentation/blocs/workout_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class AppContainer {
