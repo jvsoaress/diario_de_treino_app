@@ -1,11 +1,13 @@
-import 'package:diario_de_treino_app/app/domain/entities/exercise.dart';
-import 'package:diario_de_treino_app/app/presentation/exercise_screen.dart';
-import 'package:diario_de_treino_app/app/presentation/blocs/workout_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../app_container.dart';
+import '../domain/entities/exercise.dart';
 import 'blocs/page_bloc.dart';
+import 'blocs/workout_bloc.dart';
+import 'default_stream_builder.dart';
+import 'exercise_screen.dart';
+import 'pages_indicator.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({Key? key}) : super(key: key);
@@ -46,43 +48,20 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         children: [
           SizedBox(
             height: 40,
-            child: StreamBuilder<PageState>(
-                stream: _workoutBloc.pageStateOut,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final pageState = snapshot.data!;
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(
-                        pageState.pagesCount,
-                        (index) => Container(
-                          width: 10,
-                          height: 10,
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: pageState.currentPageIndex == index
-                                ? Colors.blue
-                                : Colors.grey.shade300,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                }),
+            child: DefaultStreamBuilder<PageState>(
+              stream: _workoutBloc.pageStateOut,
+              onData: (pageState) {
+                return PagesIndicator(
+                  currentPageIndex: pageState.currentPageIndex,
+                  pagesCount: pageState.pagesCount,
+                );
+              },
+            ),
           ),
           Expanded(
-            child: StreamBuilder<List<Exercise>>(
+            child: DefaultStreamBuilder<List<Exercise>>(
               stream: _workoutBloc.exercisesOut,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                }
-                if (snapshot.hasError) {
-                  return Text(snapshot.error.toString());
-                }
-                final exercises = snapshot.data!;
+              onData: (exercises) {
                 return PageView.builder(
                   controller: _pageBloc.pageController,
                   itemCount: exercises.length,
