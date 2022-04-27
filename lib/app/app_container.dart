@@ -1,3 +1,4 @@
+import 'package:diario_de_treino_app/app/presentation/page_bloc.dart';
 import 'package:diario_de_treino_app/app/presentation/workout_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -9,6 +10,7 @@ class AppContainer {
   static T get<T extends Object>() => _getIt.get<T>();
 
   static void initDependencies() {
-    _getIt.registerLazySingleton(() => WorkoutBloc());
+    _getIt.registerLazySingleton(() => PageBloc());
+    _getIt.registerLazySingleton(() => WorkoutBloc(pageBloc: _getIt()));
   }
 }

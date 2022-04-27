@@ -1,5 +1,4 @@
-import 'package:diario_de_treino_app/app/data/repositories/workout_repository_impl.dart';
-import 'package:diario_de_treino_app/app/presentation/home_screen.dart';
+import 'package:diario_de_treino_app/app/presentation/workout_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -7,9 +6,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Diário de Treino',
-      home: HomeScreen(),
+      home: WorkoutScreen(),
+      theme: ThemeData(
+        textTheme: Theme.of(context).textTheme.copyWith(
+              bodyText2: TextStyle(fontSize: 16),
+            ),
+      ),
     );
   }
 }
