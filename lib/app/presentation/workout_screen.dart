@@ -54,12 +54,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 return PageView.builder(
                   controller: _pageBloc.pageController,
                   itemCount: exercises.length,
-                  itemBuilder: (_, index) {
-                    return ExerciseScreen(
-                      exercises[index],
-                      key: ValueKey(exercises[index].hashCode),
-                    );
-                  },
+                  itemBuilder: (_, index) => ExerciseScreen(
+                    exercises[index],
+                    key: ValueKey(exercises[index].hashCode),
+                  ),
                 );
               },
             ),
