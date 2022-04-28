@@ -4,22 +4,29 @@ import 'package:flutter/material.dart';
 import 'base_bloc.dart';
 
 class ExerciseBloc extends BaseBloc {
-  final _performedSets = ValueNotifier<List<SetBloc>>([]);
-  ValueNotifier<List<SetBloc>> get performedSets => _performedSets;
+  final _titleController = TextEditingController();
+  TextEditingController get titleController => _titleController;
 
-  int get setsAmount => _performedSets.value.length;
+  final _setsNotifier = ValueNotifier<List<SetBloc>>([]);
+  ValueNotifier<List<SetBloc>> get setsNotifier => _setsNotifier;
+
+  int get setsAmount => _setsNotifier.value.length;
 
   void addSet() {
-    _performedSets.value = [..._performedSets.value, SetBloc()];
+    _setsNotifier.value = [..._setsNotifier.value, SetBloc()];
   }
 
   void removeLastSet() {
-    _performedSets.value = [..._performedSets.value..removeLast()];
+    _setsNotifier.value = [..._setsNotifier.value..removeLast()];
+  }
+
+  void changeTitle(String value) {
+    _titleController.text = value;
   }
 
   @override
   void dispose() {
-    _performedSets.dispose();
+    _setsNotifier.dispose();
     super.dispose();
   }
 }

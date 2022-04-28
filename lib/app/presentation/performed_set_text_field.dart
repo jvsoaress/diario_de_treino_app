@@ -55,8 +55,10 @@ class _PerformedSetTextField extends StatelessWidget {
         isDense: true,
         filled: true,
         fillColor: Colors.grey.shade100,
+        counterText: '',
         enabledBorder: InputBorder.none,
       ),
+      maxLength: 3,
       keyboardType: TextInputType.number,
       inputFormatters: inputFormatter != null ? [inputFormatter!] : null,
     );

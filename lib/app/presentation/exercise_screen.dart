@@ -22,19 +22,20 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: 'Exercício'),
+              decoration: const InputDecoration(labelText: 'Exercício'),
+              controller: _exerciseBloc.titleController,
             ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+              children: const [
                 Text('Série'),
                 Text('Carga'),
                 Text('Reps'),
               ],
             ),
             ValueListenableBuilder<List<SetBloc>>(
-              valueListenable: _exerciseBloc.performedSets,
+              valueListenable: _exerciseBloc.setsNotifier,
               builder: (context, setBlocs, _) => Column(
                 children: setBlocs.asMap().entries.map((entry) {
                   final index = entry.key;
@@ -56,8 +57,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 onPressed: () {
                   _exerciseBloc.addSet();
                 },
-                label: Text('Adicionar série'),
-                icon: Icon(Icons.add),
+                label: const Text('Adicionar série'),
+                icon: const Icon(Icons.add),
               ),
             ),
           ],
