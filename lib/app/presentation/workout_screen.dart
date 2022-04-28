@@ -1,13 +1,11 @@
+import 'package:diario_de_treino_app/app/presentation/blocs/exercise_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../app_container.dart';
-import '../domain/entities/exercise.dart';
 import 'blocs/page_bloc.dart';
 import 'blocs/workout_bloc.dart';
-import 'default_stream_builder.dart';
 import 'exercise_screen.dart';
-import 'pages_indicator.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({Key? key}) : super(key: key);
@@ -33,11 +31,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             hintStyle: TextStyle(color: Colors.white.withOpacity(.6)),
           ),
           textInputAction: TextInputAction.next,
+          controller: _workoutBloc.titleController,
         ),
         actions: [
           IconButton(
             onPressed: () {
-              // TODO: save workout
+              _workoutBloc.saveWorkout();
             },
             icon: const Icon(Icons.save),
           ),
@@ -46,18 +45,16 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildPagesIndicator(),
+          // _buildPagesIndicator(),
           Expanded(
-            child: DefaultStreamBuilder<List<Exercise>>(
-              stream: _workoutBloc.exercisesOut,
-              onData: (exercises) {
-                return PageView.builder(
+            child: ValueListenableBuilder<List<ExerciseBloc>>(
+              valueListenable: _workoutBloc.exercisesNotifier,
+              builder: (context, exerciseBlocs, _) {
+                return PageView(
                   controller: _pageBloc.pageController,
-                  itemCount: exercises.length,
-                  itemBuilder: (_, index) => ExerciseScreen(
-                    exercises[index],
-                    key: ValueKey(exercises[index].hashCode),
-                  ),
+                  children: exerciseBlocs
+                      .map((exerciseBloc) => ExerciseScreen(bloc: exerciseBloc))
+                      .toList(),
                 );
               },
             ),
@@ -95,20 +92,20 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     );
   }
 
-  Widget _buildPagesIndicator() {
-    return SizedBox(
-      height: 40,
-      child: DefaultStreamBuilder<PageState>(
-        stream: _workoutBloc.pageStateOut,
-        onData: (pageState) {
-          return PagesIndicator(
-            currentPageIndex: pageState.currentPageIndex,
-            pagesCount: pageState.pagesCount,
-          );
-        },
-      ),
-    );
-  }
+  // Widget _buildPagesIndicator() {
+  //   return SizedBox(
+  //     height: 40,
+  //     child: DefaultStreamBuilder<PageState>(
+  //       stream: _pageBloc.pageStateOut,
+  //       onData: (pageState) {
+  //         return PagesIndicator(
+  //           currentPageIndex: pageState.currentPageIndex,
+  //           pagesCount: pageState.pagesCount,
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {

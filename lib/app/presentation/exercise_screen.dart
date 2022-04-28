@@ -5,17 +5,25 @@ import 'package:flutter/material.dart';
 import 'blocs/set_bloc.dart';
 
 class ExerciseScreen extends StatefulWidget {
-  const ExerciseScreen({Key? key}) : super(key: key);
+  final ExerciseBloc bloc;
+
+  const ExerciseScreen({
+    Key? key,
+    required this.bloc,
+  }) : super(key: key);
 
   @override
   State<ExerciseScreen> createState() => _ExerciseScreenState();
 }
 
-class _ExerciseScreenState extends State<ExerciseScreen> {
-  final _exerciseBloc = ExerciseBloc();
+class _ExerciseScreenState extends State<ExerciseScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -23,7 +31,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
           children: [
             TextField(
               decoration: const InputDecoration(labelText: 'Exercício'),
-              controller: _exerciseBloc.titleController,
+              controller: widget.bloc.titleController,
             ),
             const SizedBox(height: 20),
             Row(
@@ -35,7 +43,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               ],
             ),
             ValueListenableBuilder<List<SetBloc>>(
-              valueListenable: _exerciseBloc.setsNotifier,
+              valueListenable: widget.bloc.setsNotifier,
               builder: (context, setBlocs, _) => Column(
                 children: setBlocs.asMap().entries.map((entry) {
                   final index = entry.key;
@@ -55,7 +63,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () {
-                  _exerciseBloc.addSet();
+                  widget.bloc.addSet();
                 },
                 label: const Text('Adicionar série'),
                 icon: const Icon(Icons.add),
@@ -69,7 +77,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   @override
   void dispose() {
-    _exerciseBloc.dispose();
+    widget.bloc.dispose();
     super.dispose();
   }
 }

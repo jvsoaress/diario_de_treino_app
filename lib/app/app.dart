@@ -1,4 +1,5 @@
 import 'package:diario_de_treino_app/app/presentation/exercise_screen.dart';
+import 'package:diario_de_treino_app/app/presentation/workout_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -8,9 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Diário de Treino',
-      home: Scaffold(
-        body: ExerciseScreen(),
-      ),
+      home: WorkoutScreen(),
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.copyWith(
               bodyText2: TextStyle(fontSize: 16),

@@ -1,66 +1,56 @@
-import 'package:diario_de_treino_app/app/domain/entities/exercise.dart';
-import 'package:diario_de_treino_app/app/domain/entities/workout.dart';
-import 'package:diario_de_treino_app/app/presentation/blocs/base_bloc.dart';
-import 'package:diario_de_treino_app/app/presentation/blocs/page_bloc.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:diario_de_treino_app/app/presentation/blocs/exercise_bloc.dart';
+import 'package:flutter/material.dart';
 
+import '../../domain/entities/exercise.dart';
 import '../../domain/entities/performed_set.dart';
+import '../../domain/entities/workout.dart';
+import 'base_bloc.dart';
+import 'page_bloc.dart';
 
 class WorkoutBloc extends BaseBloc {
   final PageBloc _pageBloc;
 
-  final _exercisesController =
-      BehaviorSubject<List<Exercise>>.seeded([Exercise.empty()]);
+  final _titleController = TextEditingController();
+  TextEditingController get titleController => _titleController;
 
-  Stream<List<Exercise>> get exercisesOut => _exercisesController;
-  Stream<int> get exercisesCount =>
-      exercisesOut.map((exercises) => exercises.length);
-
-  final _titleController = PublishSubject<String>();
-  Stream<String> get titleOut => _titleController;
-
-  Stream<PageState> get pageStateOut => Rx.combineLatest2<int, int, PageState>(
-        _pageBloc.onCurrentPageIndexChanged,
-        exercisesCount,
-        (a, b) => PageState(currentPageIndex: a, pagesCount: b), 
-      );
+  final _exercisesNotifier =
+      ValueNotifier<List<ExerciseBloc>>([ExerciseBloc()]);
+  ValueNotifier<List<ExerciseBloc>> get exercisesNotifier => _exercisesNotifier;
 
   WorkoutBloc({
     required PageBloc pageBloc,
   }) : _pageBloc = pageBloc;
 
+  void changeTitle(String value) {
+    _titleController.text = value;
+  }
+
   void addEmptyExercise() {
-    final previous = _exercisesController.value;
-    _exercisesController.add(previous..add(Exercise.empty()));
-    _pageBloc.animateToNextPage();
+    _exercisesNotifier.value = [..._exercisesNotifier.value, ExerciseBloc()];
   }
 
-  void removeExercise(Exercise exercise) {
-    final previous = _exercisesController.value;
-    _exercisesController.add(previous..remove(exercise));
+  void removeLastExercise() {
+    _exercisesNotifier.value = [_exercisesNotifier.value.removeLast()];
   }
 
-  void changeTitle(String newValue) {
-    if (newValue.length > 15) {
-      _titleController.addError(TitleLengthExceededFailure());
-    }
-    _titleController.add(newValue);
-  }
-
-  void changeExerciseTitle(String newValue, int index) {
-    try {
-      final exercises = _exercisesController.value;
-      exercises[index] = exercises[index].copyWith(name: newValue);
-      _exercisesController.add(exercises);
-    } on RangeError {
-      return;
+  void saveWorkout() {
+    final title = _titleController.text;
+    print('Workout($title)');
+    for (final exercise in _exercisesNotifier.value) {
+      final exerciseTitle = exercise.titleController.text;
+      print('    Exercise($exerciseTitle)');
+      for (final performedSet in exercise.setsNotifier.value) {
+        final reps = performedSet.repsController.text;
+        final weight = performedSet.weightController.text;
+        print('        PerformedSet($weight kg, $reps reps)');
+      }
     }
   }
 
   @override
   void dispose() {
-    _titleController.close();
-    _exercisesController.close();
+    _titleController.dispose();
+    _exercisesNotifier.dispose();
     _pageBloc.dispose();
     super.dispose();
   }
@@ -72,8 +62,6 @@ final mockedWorkout = Workout(
   exercises: [],
   createdAt: DateTime.now(),
 );
-
-class TitleLengthExceededFailure {}
 
 final workout = Workout(
   id: '1',
