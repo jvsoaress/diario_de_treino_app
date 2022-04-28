@@ -27,7 +27,7 @@ class _SetContainerState extends State<SetContainer> {
         Text('Peso'),
         SizedBox(width: 12),
         Expanded(
-          child: PerformedSetTextField(
+          child: WeightTextField(
             controller: _bloc.weightController,
           ),
         ),
@@ -35,7 +35,7 @@ class _SetContainerState extends State<SetContainer> {
         Text('Reps'),
         SizedBox(width: 12),
         Expanded(
-          child: PerformedSetTextField(
+          child: RepsTextField(
             controller: _bloc.repsController,
           ),
         ),
