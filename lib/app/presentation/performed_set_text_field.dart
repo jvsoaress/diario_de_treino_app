@@ -51,10 +51,10 @@ class _PerformedSetTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         isDense: true,
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.grey.shade100,
         enabledBorder: InputBorder.none,
       ),
       keyboardType: TextInputType.number,

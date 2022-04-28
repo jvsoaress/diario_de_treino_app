@@ -20,32 +20,37 @@ class SetContainer extends StatefulWidget {
 class _SetContainerState extends State<SetContainer> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Expanded(
-          child: Text(
-            widget.counter.toString(),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: WeightTextField(
-              controller: widget.bloc.weightController,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Text(
+              widget.counter.toString(),
+              textAlign: TextAlign.center,
             ),
           ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: RepsTextField(
-              controller: widget.bloc.repsController,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: WeightTextField(
+                controller: widget.bloc.weightController,
+              ),
             ),
           ),
-        ),
-      ],
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: RepsTextField(
+                controller: widget.bloc.repsController,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
