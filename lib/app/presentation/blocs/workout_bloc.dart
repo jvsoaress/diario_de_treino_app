@@ -22,7 +22,7 @@ class WorkoutBloc extends BaseBloc {
   Stream<PageState> get pageStateOut => Rx.combineLatest2<int, int, PageState>(
         _pageBloc.onCurrentPageIndexChanged,
         exercisesCount,
-        (a, b) => PageState(currentPageIndex: a, pagesCount: b),
+        (a, b) => PageState(currentPageIndex: a, pagesCount: b), 
       );
 
   WorkoutBloc({

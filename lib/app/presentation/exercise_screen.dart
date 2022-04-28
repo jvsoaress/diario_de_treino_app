@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 
 import '../domain/entities/exercise.dart';
 
-class ExerciseScreen extends StatelessWidget {
+class ExerciseScreen extends StatefulWidget {
   final Exercise exercise;
 
   const ExerciseScreen(this.exercise, {Key? key}) : super(key: key);
 
   @override
+  State<ExerciseScreen> createState() => _ExerciseScreenState();
+}
+
+class _ExerciseScreenState extends State<ExerciseScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20),

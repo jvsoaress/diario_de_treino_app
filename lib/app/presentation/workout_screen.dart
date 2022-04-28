@@ -46,18 +46,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            height: 40,
-            child: DefaultStreamBuilder<PageState>(
-              stream: _workoutBloc.pageStateOut,
-              onData: (pageState) {
-                return PagesIndicator(
-                  currentPageIndex: pageState.currentPageIndex,
-                  pagesCount: pageState.pagesCount,
-                );
-              },
-            ),
-          ),
+          _buildPagesIndicator(),
           Expanded(
             child: DefaultStreamBuilder<List<Exercise>>(
               stream: _workoutBloc.exercisesOut,
@@ -65,7 +54,12 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 return PageView.builder(
                   controller: _pageBloc.pageController,
                   itemCount: exercises.length,
-                  itemBuilder: (_, index) => ExerciseScreen(exercises[index]),
+                  itemBuilder: (_, index) {
+                    return ExerciseScreen(
+                      exercises[index],
+                      key: ValueKey(exercises[index].hashCode),
+                    );
+                  },
                 );
               },
             ),
@@ -99,6 +93,21 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPagesIndicator() {
+    return SizedBox(
+      height: 40,
+      child: DefaultStreamBuilder<PageState>(
+        stream: _workoutBloc.pageStateOut,
+        onData: (pageState) {
+          return PagesIndicator(
+            currentPageIndex: pageState.currentPageIndex,
+            pagesCount: pageState.pagesCount,
+          );
+        },
       ),
     );
   }
