@@ -1,6 +1,5 @@
+import 'package:diario_de_treino_app/app/presentation/exercise_screen.dart';
 import 'package:flutter/material.dart';
-
-import 'presentation/set_container.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -10,12 +9,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Diário de Treino',
       home: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SetContainer(counter: 1),
-          ],
-        ),
+        body: ExerciseScreen(),
       ),
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.copyWith(

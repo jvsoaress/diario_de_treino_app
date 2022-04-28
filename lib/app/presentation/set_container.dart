@@ -5,10 +5,12 @@ import 'performed_set_text_field.dart';
 
 class SetContainer extends StatefulWidget {
   final int counter;
+  final SetBloc bloc;
 
   const SetContainer({
     Key? key,
     required this.counter,
+    required this.bloc,
   }) : super(key: key);
 
   @override
@@ -16,27 +18,31 @@ class SetContainer extends StatefulWidget {
 }
 
 class _SetContainerState extends State<SetContainer> {
-  final _bloc = SetBloc();
-
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(widget.counter.toString()),
-        SizedBox(width: 36),
-        Text('Peso'),
-        SizedBox(width: 12),
         Expanded(
-          child: WeightTextField(
-            controller: _bloc.weightController,
+          child: Text(
+            widget.counter.toString(),
+            textAlign: TextAlign.center,
           ),
         ),
-        SizedBox(width: 36),
-        Text('Reps'),
-        SizedBox(width: 12),
         Expanded(
-          child: RepsTextField(
-            controller: _bloc.repsController,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: WeightTextField(
+              controller: widget.bloc.weightController,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: RepsTextField(
+              controller: widget.bloc.repsController,
+            ),
           ),
         ),
       ],
@@ -45,7 +51,7 @@ class _SetContainerState extends State<SetContainer> {
 
   @override
   void dispose() {
-    _bloc.dispose();
+    widget.bloc.dispose();
     super.dispose();
   }
 }
