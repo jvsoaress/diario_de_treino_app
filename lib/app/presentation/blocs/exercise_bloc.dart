@@ -13,7 +13,7 @@ class ExerciseBloc extends BaseBloc {
     _performedSets.value = [..._performedSets.value, SetBloc()];
   }
 
-  void removeSet() {
+  void removeLastSet() {
     _performedSets.value = [..._performedSets.value..removeLast()];
   }
 

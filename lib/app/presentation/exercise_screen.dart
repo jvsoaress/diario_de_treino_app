@@ -37,11 +37,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
               valueListenable: _exerciseBloc.performedSets,
               builder: (context, setBlocs, _) => Column(
                 children: setBlocs.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final setBloc = entry.value;
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 6),
                     child: SetContainer(
-                      counter: entry.key,
-                      bloc: entry.value,
+                      key: ValueKey(index),
+                      counter: index,
+                      bloc: setBloc,
                     ),
                   );
                 }).toList(),

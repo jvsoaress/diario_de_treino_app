@@ -21,7 +21,7 @@ void main() {
   test('should remove last set', () {
     bloc.addSet();
 
-    bloc.removeSet();
+    bloc.removeLastSet();
 
     expect(bloc.setsAmount, 0);
   });
