@@ -8,15 +8,15 @@ void main() {
     bloc = SetBloc();
   });
 
-  test('should change weight', () {
+  test('should change set weight', () {
     bloc.changeWeight('12');
 
-    expect(bloc.weightController.text, '12');
+    expect(bloc.performedSet.weight, 12);
   });
 
-  test('should change reps', () {
+  test('should change set reps', () {
     bloc.changeReps('6');
 
-    expect(bloc.repsController.text, '6');
+    expect(bloc.performedSet.reps, 6);
   });
 }
