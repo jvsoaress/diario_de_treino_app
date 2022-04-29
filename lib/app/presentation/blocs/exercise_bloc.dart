@@ -27,6 +27,9 @@ class ExerciseBloc extends BaseBloc {
   @override
   void dispose() {
     _titleController.dispose();
+    for (final bloc in _setsNotifier.value) {
+      bloc.dispose();
+    }
     _setsNotifier.dispose();
     super.dispose();
   }

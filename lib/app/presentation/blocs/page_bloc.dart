@@ -1,18 +1,19 @@
 import 'package:diario_de_treino_app/app/presentation/blocs/base_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
-import 'package:rxdart/rxdart.dart';
 
 class PageBloc extends BaseBloc {
   final _pageController = PageController();
   PageController get pageController => _pageController;
 
-  final _currentPageIndexController = BehaviorSubject<int>.seeded(0);
-  Stream<int> get onCurrentPageIndexChanged => _currentPageIndexController;
+  final _currentPageIndexNotifier = ValueNotifier<int>(0);
+  ValueNotifier<int> get currentPageIndex => _currentPageIndexNotifier;
 
   PageBloc() {
     _pageController.addListener(() {
-      _currentPageIndexController.add(_pageController.page!.toInt());
+      try {
+        _currentPageIndexNotifier.value = _pageController.page!.toInt();
+      } on AssertionError {}
     });
   }
 
@@ -26,7 +27,7 @@ class PageBloc extends BaseBloc {
   @override
   void dispose() {
     _pageController.dispose();
-    _currentPageIndexController.close();
+    _currentPageIndexNotifier.dispose();
     super.dispose();
   }
 }

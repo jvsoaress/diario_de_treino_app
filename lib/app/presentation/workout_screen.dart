@@ -6,6 +6,7 @@ import '../app_container.dart';
 import 'blocs/page_bloc.dart';
 import 'blocs/workout_bloc.dart';
 import 'exercise_screen.dart';
+import 'pages_indicator.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // _buildPagesIndicator(),
+          _buildPagesIndicator(),
           Expanded(
             child: ValueListenableBuilder<List<ExerciseBloc>>(
               valueListenable: _workoutBloc.exercisesNotifier,
@@ -92,20 +93,20 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     );
   }
 
-  // Widget _buildPagesIndicator() {
-  //   return SizedBox(
-  //     height: 40,
-  //     child: DefaultStreamBuilder<PageState>(
-  //       stream: _pageBloc.pageStateOut,
-  //       onData: (pageState) {
-  //         return PagesIndicator(
-  //           currentPageIndex: pageState.currentPageIndex,
-  //           pagesCount: pageState.pagesCount,
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+  Widget _buildPagesIndicator() {
+    return SizedBox(
+      height: 40,
+      child: AnimatedBuilder(
+        animation: _pageBloc.pageController,
+        builder: (context, _) {
+          return PagesIndicator(
+            currentPageIndex: _pageBloc.currentPageIndex.value,
+            pagesCount: _workoutBloc.exercisesCount,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   void dispose() {

@@ -17,6 +17,8 @@ class WorkoutBloc extends BaseBloc {
       ValueNotifier<List<ExerciseBloc>>([ExerciseBloc()]);
   ValueNotifier<List<ExerciseBloc>> get exercisesNotifier => _exercisesNotifier;
 
+  int get exercisesCount => _exercisesNotifier.value.length;
+
   WorkoutBloc({
     required PageBloc pageBloc,
   }) : _pageBloc = pageBloc;
@@ -27,6 +29,7 @@ class WorkoutBloc extends BaseBloc {
 
   void addEmptyExercise() {
     _exercisesNotifier.value = [..._exercisesNotifier.value, ExerciseBloc()];
+    _pageBloc.animateToNextPage();
   }
 
   void removeLastExercise() {
@@ -50,6 +53,9 @@ class WorkoutBloc extends BaseBloc {
   @override
   void dispose() {
     _titleController.dispose();
+    for (final bloc in _exercisesNotifier.value) {
+      bloc.dispose();
+    }
     _exercisesNotifier.dispose();
     _pageBloc.dispose();
     super.dispose();
