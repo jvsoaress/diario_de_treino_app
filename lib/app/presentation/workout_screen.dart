@@ -66,7 +66,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 duration: const Duration(milliseconds: 100),
                 margin: EdgeInsets.all(isKeyboardVisible ? 0 : 20),
                 width: double.infinity,
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
+                  icon: Icon(Icons.add),
                   onPressed: () {
                     _workoutBloc.addEmptyExercise();
                   },
@@ -77,8 +78,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                           BorderRadius.circular(isKeyboardVisible ? 0 : 10),
                     ),
                   ),
-                  child: const Text(
-                    'Próximo',
+                  label: const Text(
+                    'Adicionar exercício',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
