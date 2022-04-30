@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'blocs/set_bloc.dart';
 import 'performed_set_text_field.dart';
 
-class SetContainer extends StatefulWidget {
+class SetContainer extends StatelessWidget {
   final int counter;
   final SetBloc bloc;
 
@@ -13,11 +13,6 @@ class SetContainer extends StatefulWidget {
     required this.bloc,
   }) : super(key: key);
 
-  @override
-  State<SetContainer> createState() => _SetContainerState();
-}
-
-class _SetContainerState extends State<SetContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +24,7 @@ class _SetContainerState extends State<SetContainer> {
         children: [
           Expanded(
             child: Text(
-              widget.counter.toString(),
+              counter.toString(),
               textAlign: TextAlign.center,
             ),
           ),
@@ -37,7 +32,7 @@ class _SetContainerState extends State<SetContainer> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: WeightTextField(
-                controller: widget.bloc.weightController,
+                controller: bloc.weightController,
               ),
             ),
           ),
@@ -45,18 +40,12 @@ class _SetContainerState extends State<SetContainer> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: RepsTextField(
-                controller: widget.bloc.repsController,
+                controller: bloc.repsController,
               ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    widget.bloc.dispose();
-    super.dispose();
   }
 }
