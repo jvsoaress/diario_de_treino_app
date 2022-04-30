@@ -13,6 +13,12 @@ class PerformedSet with _$PerformedSet {
     String? observations,
   }) = _PerformedSet;
 
+  factory PerformedSet.empty() {
+    return PerformedSet(weight: 0, reps: 0);
+  }
+
+  bool get isValid => weight != 0 && reps != 0;
+
   Map<String, dynamic> toJson() {
     return {
       'weight': weight,

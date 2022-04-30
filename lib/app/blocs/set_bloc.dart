@@ -4,7 +4,7 @@ import '../models/performed_set.dart';
 import 'base_bloc.dart';
 
 class SetBloc extends BaseBloc {
-  PerformedSet _performedSet = PerformedSet(weight: 0, reps: 0);
+  PerformedSet _performedSet = PerformedSet.empty();
   PerformedSet get performedSet => _performedSet;
 
   final _weightController = TextEditingController();
