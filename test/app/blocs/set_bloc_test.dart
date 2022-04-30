@@ -1,4 +1,4 @@
-import 'package:diario_de_treino_app/app/presentation/blocs/set_bloc.dart';
+import 'package:diario_de_treino_app/app/blocs/set_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,5 +1,5 @@
-import 'package:diario_de_treino_app/app/domain/entities/exercise.dart';
-import 'package:diario_de_treino_app/app/domain/entities/performed_set.dart';
+import 'package:diario_de_treino_app/app/models/exercise.dart';
+import 'package:diario_de_treino_app/app/models/performed_set.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

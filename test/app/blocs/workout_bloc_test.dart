@@ -1,6 +1,6 @@
-import 'package:diario_de_treino_app/app/presentation/blocs/exercise_bloc.dart';
-import 'package:diario_de_treino_app/app/presentation/blocs/page_bloc.dart';
-import 'package:diario_de_treino_app/app/presentation/blocs/workout_bloc.dart';
+import 'package:diario_de_treino_app/app/blocs/exercise_bloc.dart';
+import 'package:diario_de_treino_app/app/blocs/page_bloc.dart';
+import 'package:diario_de_treino_app/app/blocs/workout_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
