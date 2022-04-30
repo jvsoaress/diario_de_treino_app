@@ -11,7 +11,10 @@ class AppContainer {
   static T get<T extends Object>() => _getIt.get<T>();
 
   static void initDependencies() {
-    _getIt.registerLazySingleton(() => PageBloc());
-    _getIt.registerLazySingleton(() => WorkoutBloc(pageBloc: _getIt()));
+    final pageBloc = PageBloc();
+    _getIt.registerFactory(() => pageBloc);
+    _getIt.registerFactory(() => WorkoutBloc(pageBloc: pageBloc));
   }
+
+  static void reset() => _getIt.reset();
 }
