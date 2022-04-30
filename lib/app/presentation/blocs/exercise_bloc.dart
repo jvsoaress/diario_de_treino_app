@@ -12,16 +12,16 @@ class ExerciseBloc extends BaseBloc {
 
   int get setsAmount => _setsNotifier.value.length;
 
+  void changeTitle(String value) {
+    _titleController.text = value;
+  }
+
   void addSet() {
     _setsNotifier.value = [..._setsNotifier.value, SetBloc()];
   }
 
   void removeLastSet() {
     _setsNotifier.value = [..._setsNotifier.value..removeLast()];
-  }
-
-  void changeTitle(String value) {
-    _titleController.text = value;
   }
 
   @override
