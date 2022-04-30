@@ -8,17 +8,19 @@ void main() {
     bloc = ExerciseBloc();
   });
 
-  test('should add set', () {
-    expect(bloc.setsAmount, 0);
-
-    bloc.addSet();
-
+  test('should have one initial set', () {
     expect(bloc.setsAmount, 1);
   });
 
-  test('should remove last set', () {
+  test('should add set', () {
+    expect(bloc.setsAmount, 1);
+
     bloc.addSet();
 
+    expect(bloc.setsAmount, 2);
+  });
+
+  test('should remove last set', () {
     bloc.removeLastSet();
 
     expect(bloc.setsAmount, 0);
