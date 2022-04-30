@@ -20,8 +20,12 @@ class ExerciseScreen extends StatelessWidget {
         child: Column(
           children: [
             TextField(
-              decoration: const InputDecoration(labelText: 'Exercício'),
+              decoration: const InputDecoration(
+                labelText: 'Exercício',
+                counterText: '',
+              ),
               controller: bloc.titleController,
+              maxLength: 30,
             ),
             const SizedBox(height: 20),
             Row(
