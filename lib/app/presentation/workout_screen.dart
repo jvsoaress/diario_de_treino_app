@@ -69,7 +69,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 child: ElevatedButton.icon(
                   icon: Icon(Icons.add),
                   onPressed: () {
-                    _workoutBloc.addEmptyExercise();
+                    _workoutBloc.addExercise();
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(15),

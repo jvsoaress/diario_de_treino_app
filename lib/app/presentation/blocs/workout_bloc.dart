@@ -27,13 +27,13 @@ class WorkoutBloc extends BaseBloc {
     _titleController.text = value;
   }
 
-  void addEmptyExercise() {
+  void addExercise() {
     _exercisesNotifier.value = [..._exercisesNotifier.value, ExerciseBloc()];
     _pageBloc.animateToNextPage();
   }
 
   void removeLastExercise() {
-    _exercisesNotifier.value = [_exercisesNotifier.value.removeLast()];
+    _exercisesNotifier.value = _exercisesNotifier.value..removeLast();
   }
 
   void saveWorkout() {
