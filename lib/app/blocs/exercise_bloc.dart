@@ -1,7 +1,7 @@
-import 'package:diario_de_treino_app/app/presentation/blocs/set_bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'base_bloc.dart';
+import 'set_bloc.dart';
 
 class ExerciseBloc extends BaseBloc {
   final _titleController = TextEditingController();

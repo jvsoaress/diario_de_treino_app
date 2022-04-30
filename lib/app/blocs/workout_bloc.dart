@@ -1,10 +1,7 @@
-import 'package:diario_de_treino_app/app/presentation/blocs/exercise_bloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/exercise.dart';
-import '../../domain/entities/performed_set.dart';
-import '../../domain/entities/workout.dart';
 import 'base_bloc.dart';
+import 'exercise_bloc.dart';
 import 'page_bloc.dart';
 
 class WorkoutBloc extends BaseBloc {
@@ -61,32 +58,3 @@ class WorkoutBloc extends BaseBloc {
     super.dispose();
   }
 }
-
-final mockedWorkout = Workout(
-  id: '1',
-  title: 'title',
-  exercises: [],
-  createdAt: DateTime.now(),
-);
-
-final workout = Workout(
-  id: '1',
-  title: 'test workout',
-  exercises: exercises,
-  createdAt: DateTime.now(),
-);
-
-final exercises = [
-  Exercise(
-    name: 'supino reto',
-    sets: [PerformedSet(weight: 12, reps: 10)],
-  ),
-  Exercise(
-    name: 'supino inclinado',
-    sets: [PerformedSet(weight: 12, reps: 10)],
-  ),
-  Exercise(
-    name: 'supino maquina',
-    sets: [PerformedSet(weight: 12, reps: 10)],
-  ),
-];

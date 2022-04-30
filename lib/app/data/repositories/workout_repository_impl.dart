@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:diario_de_treino_app/app/data/sql_database/sql_database.dart';
-
-import '../../domain/entities/exercise.dart';
-import '../../domain/entities/workout.dart';
-import '../../domain/repositories/workout_repository.dart';
+import '../../models/exercise.dart';
+import '../../models/workout.dart';
+import '../sql_database/sql_database.dart';
+import 'workout_repository.dart';
 
 class WorkoutRepositoryImpl implements WorkoutRepository {
   final SqlDatabase _database;

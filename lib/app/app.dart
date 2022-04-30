@@ -1,4 +1,4 @@
-import 'package:diario_de_treino_app/app/presentation/workout_screen.dart';
+import 'screens/workout_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

@@ -1,12 +1,12 @@
-import 'package:diario_de_treino_app/app/presentation/blocs/exercise_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../app_container.dart';
-import 'blocs/page_bloc.dart';
-import 'blocs/workout_bloc.dart';
+import '../blocs/exercise_bloc.dart';
+import '../blocs/page_bloc.dart';
+import '../blocs/workout_bloc.dart';
+import '../widgets/pages_indicator.dart';
 import 'exercise_screen.dart';
-import 'pages_indicator.dart';
 
 class WorkoutScreen extends StatefulWidget {
   const WorkoutScreen({Key? key}) : super(key: key);

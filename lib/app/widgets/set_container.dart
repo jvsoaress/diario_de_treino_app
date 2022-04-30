@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'blocs/set_bloc.dart';
+import '../blocs/set_bloc.dart';
 import 'performed_set_text_field.dart';
 
 class SetContainer extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'utils/number_input_formatter.dart';
+import '../utils/number_input_formatter.dart';
 
 class RepsTextField extends StatelessWidget {
   final TextEditingController controller;

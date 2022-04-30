@@ -1,5 +1,6 @@
-import 'package:diario_de_treino_app/app/domain/entities/exercise.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'exercise.dart';
 
 part 'workout.freezed.dart';
 

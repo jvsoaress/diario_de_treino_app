@@ -1,8 +1,8 @@
-import 'package:diario_de_treino_app/app/presentation/blocs/exercise_bloc.dart';
-import 'package:diario_de_treino_app/app/presentation/set_container.dart';
 import 'package:flutter/material.dart';
 
-import 'blocs/set_bloc.dart';
+import '../blocs/exercise_bloc.dart';
+import '../blocs/set_bloc.dart';
+import '../widgets/set_container.dart';
 
 class ExerciseScreen extends StatelessWidget {
   final ExerciseBloc bloc;

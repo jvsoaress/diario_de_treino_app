@@ -1,6 +1,6 @@
-import 'package:diario_de_treino_app/app/domain/entities/performed_set.dart';
 import 'package:flutter/material.dart';
 
+import '../models/performed_set.dart';
 import 'base_bloc.dart';
 
 class SetBloc extends BaseBloc {
