@@ -13,13 +13,22 @@ class SetBloc extends BaseBloc {
   final _repsController = TextEditingController();
   TextEditingController get repsController => _repsController;
 
+  SetBloc() {
+    _weightController.addListener(() {
+      changeWeight(_weightController.text);
+    });
+    _repsController.addListener(() {
+      changeReps(_repsController.text);
+    });
+  }
+
   void changeWeight(String weight) {
-    _weightController.text = weight;
+    if (weight.isEmpty) return;
     _performedSet = _performedSet.copyWith(weight: double.parse(weight));
   }
 
   void changeReps(String reps) {
-    _repsController.text = reps;
+    if (reps.isEmpty) return;
     _performedSet = _performedSet.copyWith(reps: int.parse(reps));
   }
 
