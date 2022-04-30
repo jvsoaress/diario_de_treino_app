@@ -35,16 +35,22 @@ class WorkoutBloc extends BaseBloc {
 
   void saveWorkout() {
     final title = _titleController.text;
+    if (title.isEmpty) return;
     print('Workout($title)');
     for (final exercise in _exercisesNotifier.value) {
       final exerciseTitle = exercise.titleController.text;
+      if (exerciseTitle.isEmpty) return;
       print('    Exercise($exerciseTitle)');
+      final areAllSetsValid = exercise.setsNotifier.value
+          .every((setBloc) => setBloc.performedSet.isValid);
+      if (!areAllSetsValid) return;
       for (final performedSet in exercise.setsNotifier.value) {
         final reps = performedSet.repsController.text;
         final weight = performedSet.weightController.text;
         print('        PerformedSet($weight kg, $reps reps)');
       }
     }
+    print('sucessfully saved');
   }
 
   @override
