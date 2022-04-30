@@ -7,7 +7,7 @@ class ExerciseBloc extends BaseBloc {
   final _titleController = TextEditingController();
   TextEditingController get titleController => _titleController;
 
-  final _setsNotifier = ValueNotifier<List<SetBloc>>([]);
+  final _setsNotifier = ValueNotifier<List<SetBloc>>([SetBloc()]);
   ValueNotifier<List<SetBloc>> get setsNotifier => _setsNotifier;
 
   int get setsAmount => _setsNotifier.value.length;
