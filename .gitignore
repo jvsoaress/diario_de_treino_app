@@ -49,3 +49,6 @@ app.*.map.json
 *.freezed.dart
 *.g.dart
 *.gr.dart
+
+# FVM
+.fvm/flutter_sdk
