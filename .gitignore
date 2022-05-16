@@ -52,3 +52,6 @@ app.*.map.json
 
 # FVM
 .fvm/flutter_sdk
+
+# VS Code
+.vscode
