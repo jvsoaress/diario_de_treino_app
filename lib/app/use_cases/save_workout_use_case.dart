@@ -13,7 +13,7 @@ class SaveWorkoutUseCase {
     if (workout.title.isEmpty) {
       throw EmptyWorkoutTitleFailure();
     }
-    if (workout.exercises.any((exercise) => exercise.name.isEmpty)) {
+    if (workout.exercises.any((exercise) => exercise.title.isEmpty)) {
       throw EmptyExerciseTitleFailure();
     }
     return _repository.create(workout);

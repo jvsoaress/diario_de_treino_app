@@ -56,7 +56,7 @@ class WorkoutRepositoryImpl implements WorkoutRepository {
     final jsonPerformedSets = exercise.sets.map((e) => e.toJson()).toList();
     return _database.insert(
       'INSERT INTO exercise(workout_id, name, sets) VALUES(?, ?, ?)',
-      [workoutId, exercise.name, jsonEncode(jsonPerformedSets)],
+      [workoutId, exercise.title, jsonEncode(jsonPerformedSets)],
     );
   }
 }

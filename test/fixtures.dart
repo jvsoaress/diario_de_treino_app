@@ -17,21 +17,21 @@ final workout = Workout(
 );
 
 final exerciseWithoutName = Exercise(
-  name: '',
+  title: '',
   sets: [PerformedSet(weight: 12, reps: 10)],
 );
 
 final exercises = [
   Exercise(
-    name: 'supino reto',
+    title: 'supino reto',
     sets: [PerformedSet(weight: 12, reps: 10)],
   ),
   Exercise(
-    name: 'supino inclinado',
+    title: 'supino inclinado',
     sets: [PerformedSet(weight: 12, reps: 10)],
   ),
   Exercise(
-    name: 'supino maquina',
+    title: 'supino maquina',
     sets: [PerformedSet(weight: 12, reps: 10)],
   ),
 ];

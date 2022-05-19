@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('should convert sets to json', () {
     final exercise = Exercise(
-      name: 'test exercise',
+      title: 'test exercise',
       sets: [
         PerformedSet(weight: 10, reps: 8),
         PerformedSet(weight: 20, reps: 6),

@@ -7,9 +7,9 @@ part 'exercise.freezed.dart';
 @freezed
 class Exercise with _$Exercise {
   factory Exercise({
-    required String name,
+    required String title,
     required List<PerformedSet> sets,
   }) = _Exercise;
 
-  factory Exercise.empty() => Exercise(name: '', sets: []);
+  factory Exercise.empty() => Exercise(title: '', sets: []);
 }
