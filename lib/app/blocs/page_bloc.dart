@@ -11,9 +11,7 @@ class PageBloc extends BaseBloc {
 
   PageBloc() {
     _pageController.addListener(() {
-      try {
-        _currentPageIndexNotifier.value = _pageController.page!.toInt();
-      } on AssertionError {}
+      _currentPageIndexNotifier.value = _pageController.page!.toInt();
     });
   }
 
