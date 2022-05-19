@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:rxdart/subjects.dart';
 
+import '../models/exercise.dart';
+import '../models/workout.dart';
+import '../use_cases/save_workout_use_case.dart';
 import 'base_bloc.dart';
 import 'exercise_bloc.dart';
 import 'page_bloc.dart';
 
+enum BlocState { initial, loading, success }
+
 class WorkoutBloc extends BaseBloc {
+  final _controller = BehaviorSubject.seeded(BlocState.initial);
+  Stream<BlocState> get state => _controller;
+
   final PageBloc _pageBloc;
+  final SaveWorkoutUseCase _saveWorkout;
 
   final _titleController = TextEditingController();
   TextEditingController get titleController => _titleController;
@@ -18,7 +28,9 @@ class WorkoutBloc extends BaseBloc {
 
   WorkoutBloc({
     required PageBloc pageBloc,
-  }) : _pageBloc = pageBloc;
+    required SaveWorkoutUseCase saveWorkoutUseCase,
+  })  : _pageBloc = pageBloc,
+        _saveWorkout = saveWorkoutUseCase;
 
   void changeTitle(String value) {
     _titleController.text = value;
@@ -33,9 +45,28 @@ class WorkoutBloc extends BaseBloc {
     _exercisesNotifier.value = _exercisesNotifier.value..removeLast();
   }
 
-  void saveWorkout() {
+  Future<void> saveWorkout() async {
+    logCurrentState();
+    final exercises = _exercisesNotifier.value
+        .map((exercise) => Exercise(
+              title: exercise.titleController.text,
+              sets: exercise.setsNotifier.value
+                  .map((e) => e.performedSet)
+                  .toList(),
+            ))
+        .toList();
+    final workout = Workout(
+      title: _titleController.text,
+      exercises: exercises,
+      createdAt: DateTime.now(),
+    );
+    _controller.add(BlocState.loading);
+    await _saveWorkout.call(workout);
+    _controller.add(BlocState.success);
+  }
+
+  void logCurrentState() {
     final title = _titleController.text;
-    if (title.isEmpty) return;
     print('Workout($title)');
     for (final exercise in _exercisesNotifier.value) {
       final exerciseTitle = exercise.titleController.text;
@@ -50,7 +81,6 @@ class WorkoutBloc extends BaseBloc {
         print('        PerformedSet($weight kg, $reps reps)');
       }
     }
-    print('sucessfully saved');
   }
 
   @override

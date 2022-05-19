@@ -1,20 +1,34 @@
 import 'package:diario_de_treino_app/app/blocs/exercise_bloc.dart';
 import 'package:diario_de_treino_app/app/blocs/page_bloc.dart';
 import 'package:diario_de_treino_app/app/blocs/workout_bloc.dart';
+import 'package:diario_de_treino_app/app/use_cases/save_workout_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
+import '../../fixtures.dart';
 
 final exerciseBloc = ExerciseBloc();
 
 class MockPageBloc extends Mock implements PageBloc {}
 
+class MockSaveWorkoutUseCase extends Mock implements SaveWorkoutUseCase {}
+
 void main() {
   late WorkoutBloc bloc;
-  late MockPageBloc mockPageBloc;
+  late PageBloc mockPageBloc;
+  late SaveWorkoutUseCase mockSaveWorkoutUseCase;
+
+  setUpAll(() {
+    registerFallbackValue(mockedWorkout);
+  });
 
   setUp(() {
     mockPageBloc = MockPageBloc();
-    bloc = WorkoutBloc(pageBloc: mockPageBloc);
+    mockSaveWorkoutUseCase = MockSaveWorkoutUseCase();
+    bloc = WorkoutBloc(
+      pageBloc: mockPageBloc,
+      saveWorkoutUseCase: mockSaveWorkoutUseCase,
+    );
   });
 
   test('should change workout title', () {
@@ -38,6 +52,17 @@ void main() {
     bloc.removeLastExercise();
 
     expect(bloc.exercisesCount, 0);
+  });
+
+  test('should update state when workout is saved', () {
+    when(() => mockSaveWorkoutUseCase.call(any())).thenAnswer((_) async {});
+
+    bloc.saveWorkout();
+
+    expect(
+      bloc.state,
+      emitsInOrder([BlocState.loading, BlocState.success]),
+    );
   });
 
   tearDown(() {
