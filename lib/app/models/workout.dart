@@ -7,7 +7,7 @@ part 'workout.freezed.dart';
 @freezed
 class Workout with _$Workout {
   factory Workout({
-    required String id,
+    String? id,
     required String title,
     required List<Exercise> exercises,
     required DateTime createdAt,
