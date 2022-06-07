@@ -3,7 +3,6 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import '../app_container.dart';
 import '../blocs/exercise_bloc.dart';
-import '../blocs/page_bloc.dart';
 import '../blocs/workout_bloc.dart';
 import '../widgets/pages_indicator.dart';
 import 'exercise_screen.dart';
@@ -17,7 +16,6 @@ class WorkoutScreen extends StatefulWidget {
 
 class _WorkoutScreenState extends State<WorkoutScreen> {
   final _workoutBloc = AppContainer.get<WorkoutBloc>();
-  final _pageBloc = AppContainer.get<PageBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               valueListenable: _workoutBloc.exercisesNotifier,
               builder: (context, exerciseBlocs, _) {
                 return PageView(
-                  controller: _pageBloc.pageController,
+                  controller: _workoutBloc.pageController,
                   children: exerciseBlocs
                       .map((exerciseBloc) => ExerciseScreen(bloc: exerciseBloc))
                       .toList(),
@@ -67,7 +65,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                 margin: EdgeInsets.all(isKeyboardVisible ? 0 : 20),
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () {
                     _workoutBloc.addExercise();
                   },
@@ -98,10 +96,10 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
     return SizedBox(
       height: 40,
       child: AnimatedBuilder(
-        animation: _pageBloc.pageController,
+        animation: _workoutBloc.pageController,
         builder: (context, _) {
           return PagesIndicator(
-            currentPageIndex: _pageBloc.currentPageIndex.value,
+            currentPageIndex: _workoutBloc.currentPageIndex,
             pagesCount: _workoutBloc.exercisesCount,
           );
         },
