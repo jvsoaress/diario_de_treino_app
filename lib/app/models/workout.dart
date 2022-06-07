@@ -6,6 +6,8 @@ part 'workout.freezed.dart';
 
 @freezed
 class Workout with _$Workout {
+  const Workout._();
+
   factory Workout({
     String? id,
     required String title,
@@ -13,4 +15,6 @@ class Workout with _$Workout {
     required DateTime createdAt,
     String? observations,
   }) = _Workout;
+
+  bool get isValid => exercises.isNotEmpty;
 }
